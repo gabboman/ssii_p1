@@ -7,6 +7,7 @@ import os
 import platform
 import hashlib
 import codecs
+import json
 #import configparser, os
 
 #detectar sistema operativo
@@ -25,10 +26,13 @@ import codecs
 #config.readfp(open('config.conf'))
 #config.read(['bitbucket.org', os.path.expanduser('~/.myapp.cfg')])
 
-for path, dirs, files in os.walk('/home/gabriel/ownCloud'):
-    print (path)
+hashDict= dict()
+
+for path, dirs, files in os.walk('/home/gabriel/ownCloud/workspace'):
+    #print (path)
     for f in files:
         archivo= codecs.open(path+'/'+f,'rb')
-        #hasher= hashlib.sha256()
-
-        print (path+'/'+f+' sha256: ' + hashlib.sha256(archivo.read()).hexdigest() )
+        hashDict[path+'/'+f]= hashlib.sha256(archivo.read()).hexdigest()
+archivo=open('datos.json','w')
+json_data = json.dump(hashDict,archivo, sort_keys=True, indent=4)
+archivo.close()
