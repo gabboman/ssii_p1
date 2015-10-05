@@ -1,9 +1,12 @@
+#/bin/python
+
 #Python 3
 #guille es feo
 #muy feo
 import os
 import platform
 import hashlib
+import codecs
 #import configparser, os
 
 #detectar sistema operativo
@@ -22,8 +25,10 @@ import hashlib
 #config.readfp(open('config.conf'))
 #config.read(['bitbucket.org', os.path.expanduser('~/.myapp.cfg')])
 
-for path, dirs, files in os.walk('/home/practica/gabamagar'):
-  print (path)
-  for f in files:
-  	archivo= open(path+'/'+f)
-  	print (path+'/'+f+' sha256: ' + hashlib.sha256(archivo.read()).hexdigest() )
+for path, dirs, files in os.walk('/home/gabriel/ownCloud'):
+    print (path)
+    for f in files:
+        archivo= codecs.open(path+'/'+f,'rb')
+        #hasher= hashlib.sha256()
+
+        print (path+'/'+f+' sha256: ' + hashlib.sha256(archivo.read()).hexdigest() )
