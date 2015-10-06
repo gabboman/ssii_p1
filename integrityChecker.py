@@ -33,11 +33,13 @@ for path, dirs, files in os.walk('/home/gabriel/ownCloud/workspace'):
     for f in files:
         archivo= codecs.open(path+'/'+f,'rb')
         hashDict[path+'/'+f]= hashlib.sha256(archivo.read()).hexdigest()
-archivo=open('datos.json','w')
-json_data = json.dump(hashDict,archivo, sort_keys=True, indent=4)
-archivo.close()
+#archivo=open('datos.json','w')
+#json_data = json.dump(hashDict,archivo, sort_keys=True, indent=4)
+#archivo.close()
 
 archivo=open('datos.json','r')
-contenido=archivo.read()
-yeison=json.loads(contenido)
-print(yeison)
+#contenido=archivo.read()
+antiguo=json.load(archivo)
+#print(yeison["/home/gabriel/ownCloud/workspace/HighfredoBot/.git/COMMIT_EDITMSG"])
+
+#print(antiguo==hashDict)
