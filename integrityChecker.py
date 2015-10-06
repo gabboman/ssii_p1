@@ -36,3 +36,8 @@ for path, dirs, files in os.walk('/home/gabriel/ownCloud/workspace'):
 archivo=open('datos.json','w')
 json_data = json.dump(hashDict,archivo, sort_keys=True, indent=4)
 archivo.close()
+
+archivo=open('datos.json','r')
+contenido=archivo.read()
+yeison=json.loads(contenido)
+print(yeison)
