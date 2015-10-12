@@ -1,43 +1,35 @@
 #/bin/python
 
 #Python 3
-#guille es feo
-#muy feo
+#
 import os
-import platform
 import hashlib
 import codecs
 import json
-#import configparser, os
 
-#detectar sistema operativo
-#print (os.name)
-#print (platform.system())
-#print ("gabamagar backup. Integrity check system in python. ")
-#print(hashlib.sha224(b"texto").hexdigest())
+archivo=open('settings.json','r')
+settings=json.load(archivo)
 
-#peleando con abrir archivo y hashearlo
-#archivo= open('config.conf')
-#print(archivo.read())
-#print(hashlib.sha256(archivo.read()).hexdigest())
-
-#peleando con la config
-#config = configparser.ConfigParser()
-#config.readfp(open('config.conf'))
-#config.read(['bitbucket.org', os.path.expanduser('~/.myapp.cfg')])
+first_run=settings["first_run"]
+digest_path=settings["digest_path"]
+gmail_user=settings["gmail_user"]
+gmail_passwd=settings["gmail_passwd"]
+to_check=settings["to_check"]
+exclude=settings["exclude"]
 
 nuevo= dict()
+for location in to_check:
+    for path, dirs, files in os.walk(location):
+        if path not in exclude:
+            for f in files:
+                archivo= codecs.open(path+'/'+f,'rb')
+                nuevo[path+'/'+f]= hashlib.sha256(archivo.read()).hexdigest()
+if(first_run):
+    archivo=open(digest_path,'w')
+    json_data = json.dump(nuevo,archivo, sort_keys=True, indent=4)
+    archivo.close()
 
-for path, dirs, files in os.walk('/home/gabriel/ownCloud/workspace'):
-    #print (path)
-    for f in files:
-        archivo= codecs.open(path+'/'+f,'rb')
-        nuevo[path+'/'+f]= hashlib.sha256(archivo.read()).hexdigest()
-#archivo=open('datos.json','w')
-#json_data = json.dump(nuevo,archivo, sort_keys=True, indent=4)
-#archivo.close()
-
-archivo=open('datos.json','r')
+archivo=open(digest_path,'r')
 #contenido=archivo.read()
 antiguo=json.load(archivo)
 #print(yeison["/home/gabriel/ownCloud/workspace/HighfredoBot/.git/COMMIT_EDITMSG"])
@@ -68,3 +60,5 @@ def dict_diff(first, second):#Metodo encontrado en internet
             diff[key] = (KEYNOTFOUND, second[key])
     return diff
 diferencia=dict_diff(antiguo,nuevo)
+
+print (diferencia)
