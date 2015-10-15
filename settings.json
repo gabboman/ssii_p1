@@ -1,8 +1,0 @@
-{
-  "first_run":false,
-  "digest_path":"/home/gabriel/workspace/SSII/p1/datos.json",
-  "gmail_user":"timcoock69@gmail.com",
-  "gmail_passwd":"passwordinplaintext",
-  "to_check": ["/home/gabriel/workspace","/home/gabriel/ownCloud/workspace"],
-  "exclude": ["/home/gabriel/workspace/SSII","NOPE 2"]
-}
