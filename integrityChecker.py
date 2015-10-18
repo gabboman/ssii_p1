@@ -11,19 +11,23 @@ import json
 nuevo= dict()
 settingsf=open("settings.json")
 settings=json.load(settingsf)
+
+
+first_run=settings["first_run"]
 dirs2check=settings["direcorios_a_revisar"]
-print (dirs2check)
+digest_path=settings["digest_path"]
+
 for d in dirs2check:
-    for path, dirs, files in os.walk('/home/gabriel/ownCloud/workspace'):
-        #print (path)
+    for path, dirs, files in os.walk(d ):
         for f in files:
             archivo= codecs.open(path+'/'+f,'rb')
             nuevo[path+'/'+f]= hashlib.sha256(archivo.read()).hexdigest()
-#archivo=open('datos.json','w')
-#json_data = json.dump(nuevo,archivo, sort_keys=True, indent=4)
-#archivo.close()
+if(first_run):
+    archivo=open(digest_path,'w')
+    json_data = json.dump(nuevo,archivo, sort_keys=True, indent=4)
+    archivo.close()
 
-archivo=open('datos.json','r')
+archivo=open(digest_path,'r')
 #contenido=archivo.read()
 antiguo=json.load(archivo)
 #print(yeison["/home/gabriel/ownCloud/workspace/HighfredoBot/.git/COMMIT_EDITMSG"])
