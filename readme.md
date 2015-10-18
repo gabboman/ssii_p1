@@ -1,8 +1,9 @@
 Instrucciones:
 
-Testeado en Linux y Windows, no teesteado en OS X
+Testeado en Linux y Windows.
+No teesteado en OS X, se agradece feedback
 
-Requisitos: Python3, una cuenta de gmail extra.
+Requisitos: Python3, una cuenta de gmail extra (No debe tener otro uso que enviar mensajes de la aplicación)
 
 Configuración en windows:
 
