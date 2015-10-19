@@ -83,10 +83,13 @@ if(not len(diferencia) ==0):
     TEXT= TEXT+"Numero de archivos eliminados: "+str(borrados)+'\r\n'
     TEXT= TEXT+"Numero de archivos nuevos que no deberian estar: "+str(nuevos)+'\r\n'
     TEXT= TEXT+"Numero de archivos modificados: "+str(len(diferencia)-nuevos-borrados)+'\r\n'
+    TEXT= TEXT+json.dumps(diferencia, sort_keys=True, indent=4)+'\r\n'
     TEXT= TEXT+"Este es un correo automatico. No responda por favor"
+
 else:
     SUBJECT="Archivos integros"
-    TEXT='Los archivos continuan integros'
+    TEXT='Los archivos continuan integros.'+'\r\n'
+    TEXT= TEXT+"Este es un correo automatico. No responda por favor"
 
 TO = destination
 
