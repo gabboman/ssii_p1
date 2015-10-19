@@ -48,14 +48,14 @@ def dict_diff(first, second):#Metodo encontrado en internet
     diff = {}
     # Check all keys in first dict
     for key in first.keys():
-        if (not second.has_key(key)):
+        if (not key in second):
             diff[key] = (first[key], KEYNOTFOUND)
         elif (first[key] != second[key]):
             diff[key] = (first[key], second[key])
     # Check all keys in second dict to find missing
     for key in second.keys():
-        if (not first.has_key(key)):
+        if (not key in first):
             diff[key] = (KEYNOTFOUND, second[key])
     return diff
 diferencia=dict_diff(antiguo,nuevo)
-print diferencia
+print (len(diferencia))
