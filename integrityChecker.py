@@ -58,4 +58,9 @@ def dict_diff(first, second):#Metodo encontrado en internet
             diff[key] = (KEYNOTFOUND, second[key])
     return diff
 diferencia=dict_diff(antiguo,nuevo)
-print (len(diferencia))
+
+borrados=0
+for a in diferencia:
+    if diferencia[a][0]=KEYNOTFOUND:
+        borrados=borrados+1
+print borrados
