@@ -1,5 +1,8 @@
 {
-  "first_run":true,
-  "direcorios_a_revisar":["/home/gabriel/ownCloud/workspace","/home/gabriel/dropbox"],
-  "digest_path":"/home/gabriel/slida.json"
+  "first_run":false,
+  "direcorios_a_revisar":["/home/gabriel/workspace"],
+  "digest_path":"/home/gabriel/slida.json",
+  "gmail_user":"account@gmail.com",
+  "gmail_passwd":"passwd here",
+  "destination":"a_gorila@zoomail.com"
 }

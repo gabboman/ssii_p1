@@ -5,6 +5,7 @@ import platform
 import hashlib
 import codecs
 import json
+
 #import configparser, os
 
 
@@ -16,6 +17,9 @@ settings=json.load(settingsf)
 first_run=settings["first_run"]
 dirs2check=settings["direcorios_a_revisar"]
 digest_path=settings["digest_path"]
+gmail_user=settings["gmail_user"]
+gmail_passwd=settings["gmail_passwd"]
+destination=settings["destination"]
 
 for d in dirs2check:
     for path, dirs, files in os.walk(d ):
@@ -67,12 +71,41 @@ for a in diferencia:
     if diferencia[a][1]==KEYNOTFOUND:
         borrados=borrados+1
 
+
+SUBJECT = 'MAIL_SUBJECT'
+TEXT = ''
 porcentajeBorrado=borrados*100.0/len(antiguo)
 porcentajeModificado=(len(diferencia)-nuevos-borrados*1.0)*100.0/len(antiguo)
 if(not len(diferencia) ==0):
-    print("=======ERRORES======")
-    print("Número de archivos eliminados: "+str(borrados))
-    print("Número de archivos nuevos que no deberían estar: "+str(nuevos))
-    print("Número de archivos modificados: "+str(len(diferencia)-nuevos-borrados))
+    SUBJECT='ERROR: Archivos no integros'
+    TEXT= TEXT+"Número de archivos eliminados: "+str(borrados)+'\r\n'
+    TEXT= TEXT+"Número de archivos nuevos que no deberían estar: "+str(nuevos)+'\r\n'
+    TEXT= TEXT+"Número de archivos modificados: "+str(len(diferencia)-nuevos-borrados)+'\r\n'
 else:
-    print ("100% OK")
+    SUBJECT="Archivos integros"
+    TEXT='Los archivos continuan integros'
+
+TO = destination
+
+
+# Gmail Sign In
+gmail_sender = gmail_user
+gmail_passwd = gmail_passwd
+
+server = smtplib.SMTP('smtp.gmail.com', 587)
+server.ehlo()
+server.starttls()
+server.login(gmail_sender, gmail_passwd)
+
+BODY = '\r\n'.join(['To: %s' % TO,
+                    'From: %s' % gmail_sender,
+                    'Subject: %s' % SUBJECT,
+                    '', TEXT])
+
+try:
+    server.sendmail(gmail_sender, [TO], BODY)
+    print ('email sent')
+except:
+    print ('error sending mail')
+
+server.quit()
