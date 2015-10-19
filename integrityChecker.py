@@ -67,9 +67,12 @@ for a in diferencia:
     if diferencia[a][1]==KEYNOTFOUND:
         borrados=borrados+1
 
-
-print (borrados)
-print (nuevos)
 porcentajeBorrado=borrados*100.0/len(antiguo)
 porcentajeModificado=(len(diferencia)-nuevos-borrados*1.0)*100.0/len(antiguo)
-print(porcentajeBorrado)
+if(not len(diferencia) ==0):
+    print("=======ERRORES======")
+    print("Número de archivos eliminados: "+str(borrados))
+    print("Número de archivos nuevos que no deberían estar: "+str(nuevos))
+    print("Número de archivos modificados: "+str(len(diferencia)-nuevos-borrados))
+else:
+    print ("100% OK")
