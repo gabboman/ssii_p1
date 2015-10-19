@@ -1,10 +1,12 @@
 #/bin/python3
+# -*- encoding: utf-8 -*-
 
 import os
 import platform
 import hashlib
 import codecs
 import json
+import smtplib
 
 #import configparser, os
 
@@ -78,9 +80,10 @@ porcentajeBorrado=borrados*100.0/len(antiguo)
 porcentajeModificado=(len(diferencia)-nuevos-borrados*1.0)*100.0/len(antiguo)
 if(not len(diferencia) ==0):
     SUBJECT='ERROR: Archivos no integros'
-    TEXT= TEXT+"Número de archivos eliminados: "+str(borrados)+'\r\n'
-    TEXT= TEXT+"Número de archivos nuevos que no deberían estar: "+str(nuevos)+'\r\n'
-    TEXT= TEXT+"Número de archivos modificados: "+str(len(diferencia)-nuevos-borrados)+'\r\n'
+    TEXT= TEXT+"Numero de archivos eliminados: "+str(borrados)+'\r\n'
+    TEXT= TEXT+"Numero de archivos nuevos que no deberian estar: "+str(nuevos)+'\r\n'
+    TEXT= TEXT+"Numero de archivos modificados: "+str(len(diferencia)-nuevos-borrados)+'\r\n'
+    TEXT= TEXT+"Este es un correo automatico. No responda por favor"
 else:
     SUBJECT="Archivos integros"
     TEXT='Los archivos continuan integros'
