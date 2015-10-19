@@ -79,11 +79,11 @@ TEXT = ''
 porcentajeBorrado=borrados*100.0/len(antiguo)
 porcentajeModificado=(len(diferencia)-nuevos-borrados*1.0)*100.0/len(antiguo)
 if(not len(diferencia) ==0):
-    SUBJECT='ERROR: Archivos no integros'
+    SUBJECT='ERROR: INtegridad al '+str((len(diferencia)+borrados*1.0)/len(antiguo))+'%. '+str(borrados)+' ARCHIVOS ELIMINADOS, '+str(len(diferencia)-nuevos-borrados)+' ARCHIVOS MODIFICADOS Y '+str(nuevos)+ ' ARCHIVOS NUEVOS'
     TEXT= TEXT+"Numero de archivos eliminados: "+str(borrados)+'\r\n'
     TEXT= TEXT+"Numero de archivos nuevos que no deberian estar: "+str(nuevos)+'\r\n'
     TEXT= TEXT+"Numero de archivos modificados: "+str(len(diferencia)-nuevos-borrados)+'\r\n'
-    TEXT= TEXT+json.dumps(diferencia, sort_keys=True, indent=4)+'\r\n'
+    TEXT= TEXT+json.dumps(diferencia, sort_keys=True, indent=1)+'\r\n'
     TEXT= TEXT+"Este es un correo automatico. No responda por favor"
 
 else:
