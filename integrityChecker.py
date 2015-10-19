@@ -60,7 +60,16 @@ def dict_diff(first, second):#Metodo encontrado en internet
 diferencia=dict_diff(antiguo,nuevo)
 
 borrados=0
+nuevos=0
 for a in diferencia:
-    if diferencia[a][0]=KEYNOTFOUND:
+    if diferencia[a][0]==KEYNOTFOUND:
+        nuevos=nuevos+1
+    if diferencia[a][1]==KEYNOTFOUND:
         borrados=borrados+1
-print borrados
+
+
+print (borrados)
+print (nuevos)
+porcentajeBorrado=borrados*100.0/len(antiguo)
+porcentajeModificado=(len(diferencia)-nuevos-borrados*1.0)*100.0/len(antiguo)
+print(porcentajeBorrado)
